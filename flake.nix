@@ -1,6 +1,6 @@
 {
   description = "zarkone-dwl";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/22.11";
   inputs.nixpkgs-wayland  = { url = "github:nix-community/nixpkgs-wayland"; };
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
@@ -22,7 +22,7 @@
         nativeBuildInputs = with pkgs; [
           wayland-pkgs.wlroots
           wayland-pkgs.new-wayland-protocols
-          wayland
+          wayland.dev
           pkg-config
           libxkbcommon
           libinput
