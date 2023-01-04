@@ -1,6 +1,7 @@
 {
   description = "zarkone-dwl";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs-wayland  = { url = "github:nix-community/nixpkgs-wayland"; };
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.flake-compat = {
@@ -8,18 +9,19 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { self, nixpkgs, nixpkgs-wayland, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
       };
+      wayland-pkgs = nixpkgs-wayland.packages.${system};
     in {
       devShell = pkgs.mkShell {
         name = "zarkone-dwl";
         nativeBuildInputs = with pkgs; [
-          wlroots
-          wayland-protocols
+          wayland-pkgs.wlroots
+          wayland-pkgs.new-wayland-protocols
           wayland
           pkg-config
           libxkbcommon
@@ -41,7 +43,7 @@
           tmux
           fish
           google-chrome-beta
-
+          direnv nix-direnv
         ];
       };
     });
