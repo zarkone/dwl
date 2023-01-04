@@ -174,6 +174,7 @@ struct Monitor {
 	struct wlr_scene_rect *fullscreen_bg; /* See createmon() for info */
 	struct wl_listener frame;
 	struct wl_listener destroy;
+	struct wl_listener request_state;
 	struct wl_listener destroy_lock_surface;
 	struct wlr_session_lock_surface_v1 *lock_surface;
 	struct wlr_box m;      /* monitor area, layout-relative */
@@ -278,6 +279,7 @@ static void quit(const Arg *arg);
 static void quitsignal(int signo);
 static void rendermon(struct wl_listener *listener, void *data);
 static void requeststartdrag(struct wl_listener *listener, void *data);
+static void requestmonstate(struct wl_listener *listener, void *data);
 static void resize(Client *c, struct wlr_box geo, int interact);
 static void run(char *startup_cmd);
 static void setcursor(struct wl_listener *listener, void *data);
@@ -324,6 +326,7 @@ static struct wlr_scene_tree *layers[NUM_LAYERS];
 static struct wlr_renderer *drw;
 static struct wlr_allocator *alloc;
 static struct wlr_compositor *compositor;
+static struct wlr_session *session;
 
 static struct wlr_xdg_shell *xdg_shell;
 static struct wlr_xdg_activation_v1 *activation;
@@ -618,7 +621,8 @@ buttonpress(struct wl_listener *listener, void *data)
 void
 chvt(const Arg *arg)
 {
-	wlr_session_change_vt(wlr_backend_get_session(backend), arg->ui);
+	if (session)
+		wlr_session_change_vt(session, arg->ui);
 }
 
 void
@@ -921,6 +925,7 @@ createmon(struct wl_listener *listener, void *data)
 	/* Set up event listeners */
 	LISTEN(&wlr_output->events.frame, &m->frame, rendermon);
 	LISTEN(&wlr_output->events.destroy, &m->destroy, cleanupmon);
+	LISTEN(&wlr_output->events.request_state, &m->request_state, requestmonstate);
 
 	wlr_output_enable(wlr_output, 1);
 	if (!wlr_output_commit(wlr_output))
@@ -1058,8 +1063,6 @@ cursorframe(struct wl_listener *listener, void *data)
 void
 destroydragicon(struct wl_listener *listener, void *data)
 {
-	struct wlr_drag_icon *icon = data;
-	wlr_scene_node_destroy(icon->data);
 	/* Focus enter isn't sent during drag, so refocus the focused node. */
 	focusclient(focustop(selmon), 1);
 	motionnotify(0);
@@ -1596,8 +1599,8 @@ motionnotify(uint32_t time)
 
 	/* Update drag icon's position if any */
 	if (seat->drag && (icon = seat->drag->icon))
-		wlr_scene_node_set_position(icon->data, cursor->x + icon->surface->sx,
-				cursor->y + icon->surface->sy);
+		wlr_scene_node_set_position(icon->data, cursor->x + icon->surface->current.dx,
+				cursor->y + icon->surface->current.dy);
 	/* If we are currently grabbing the mouse, handle and return */
 	if (cursor_mode == CurMove) {
 		/* Move the grabbed client to the new position. */
@@ -1713,7 +1716,7 @@ outputmgrapplyortest(struct wlr_output_configuration_v1 *config, int test)
 		/* Don't move monitors if position wouldn't change, this to avoid
 		 * wlroots marking the output as manually configured */
 		if (m->m.x != config_head->state.x || m->m.y != config_head->state.y)
-			wlr_output_layout_move(output_layout, wlr_output,
+			wlr_output_layout_add(output_layout, wlr_output,
 					config_head->state.x, config_head->state.y);
 		wlr_output_set_transform(wlr_output, config_head->state.transform);
 		wlr_output_set_scale(wlr_output, config_head->state.scale);
@@ -1854,6 +1857,14 @@ requeststartdrag(struct wl_listener *listener, void *data)
 		wlr_seat_start_pointer_drag(seat, event->drag, event->serial);
 	else
 		wlr_data_source_destroy(event->drag->source);
+}
+
+void
+requestmonstate(struct wl_listener *listener, void *data)
+{
+	struct wlr_output_event_request_state *event = data;
+	wlr_output_commit_state(event->output, event->state);
+	updatemons(NULL, NULL);
 }
 
 void
@@ -2087,7 +2098,7 @@ setup(void)
 	 * backend uses the renderer, for example, to fall back to software cursors
 	 * if the backend does not support hardware cursors (some older GPUs
 	 * don't). */
-	if (!(backend = wlr_backend_autocreate(dpy)))
+	if (!(backend = wlr_backend_autocreate(dpy, &session)))
 		die("couldn't create backend");
 
 	/* Initialize the scene graph used to lay out windows */
@@ -2158,7 +2169,7 @@ setup(void)
 	idle_inhibit_mgr = wlr_idle_inhibit_v1_create(dpy);
 	wl_signal_add(&idle_inhibit_mgr->events.new_inhibitor, &idle_inhibitor_create);
 
-	layer_shell = wlr_layer_shell_v1_create(dpy);
+	layer_shell = wlr_layer_shell_v1_create(dpy, 3);
 	wl_signal_add(&layer_shell->events.new_surface, &new_layer_shell_surface);
 
 	xdg_shell = wlr_xdg_shell_create(dpy, 4);
@@ -2270,7 +2281,7 @@ startdrag(struct wl_listener *listener, void *data)
 	if (!drag->icon)
 		return;
 
-	drag->icon->data = wlr_scene_subsurface_tree_create(layers[LyrDragIcon], drag->icon->surface);
+	drag->icon->data = wlr_scene_drag_icon_create(layers[LyrDragIcon], drag->icon);
 	motionnotify(0);
 	wl_signal_add(&drag->icon->events.destroy, &drag_icon_destroy);
 }
