@@ -36,6 +36,11 @@
           wofi
           waybar
           inotify-tools
+          # deck soft
+          emacs
+          tmux
+          fish
+          google-chrome-beta
 
         ];
       };
