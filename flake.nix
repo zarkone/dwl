@@ -38,6 +38,7 @@
           wofi
           waybar
           inotify-tools
+          slurp
           # deck soft
           # emacs
           # tmux
