@@ -26,8 +26,9 @@ static const Rule rules[] = {
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },
+        { "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+
 };
 
 /* monitors */
@@ -37,10 +38,8 @@ static const MonitorRule monrules[] = {
 	{ "eDP-1",    0.5,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL },
 	*/
 	/* defaults */
-        { "HDMI-A-1",       0.5, 1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
-	//{ "eDP" ,           0.55, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_270},
-
-	{ "DP-1", 0.5, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_90, -4608, 0},
+        { "HDMI-A-1",       0.5, 1,      2,    &layouts[1], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+	{ "DP-1",           0.5, 1,      1.5,    &layouts[1], WL_OUTPUT_TRANSFORM_90, -4608, 0},
 };
 
 /* keyboard */
@@ -98,6 +97,7 @@ static const double accel_speed = 0.0;
 static const char *termcmd[] = { "foot-run.sh", NULL };
 static const char *menucmd[] = { "wofi-run.sh", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
+static const char *emacscmd[] = { "emacsclient", "-c", "-a", "''" };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -105,6 +105,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = browsercmd} },
+	{ MODKEY,                    XKB_KEY_f,          spawn,          {.v = emacscmd} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
@@ -114,16 +115,15 @@ static const Key keys[] = {
 	// { MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY,                    XKB_KEY_q,          killclient,     {0} },
-	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                    XKB_KEY_g,          setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
-	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
+	{ MODKEY,                    XKB_KEY_e,          togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
-	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
-	{ MODKEY,                    XKB_KEY_period,     focusmon,       {.i = WLR_DIRECTION_RIGHT} },
+	{ MODKEY,                    XKB_KEY_o,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
+	// { MODKEY,                    XKB_KEY_period,     focusmon,       {.i = WLR_DIRECTION_RIGHT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,       tagmon,         {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,    tagmon,         {.i = WLR_DIRECTION_RIGHT} },
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                     0),
