@@ -23,8 +23,8 @@
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: "Iosevka";
-    font-size: 14px;
+    font-family: "Iosevka Comfy";
+    font-size: 16px;
 }
 
 window#waybar {
