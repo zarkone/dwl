@@ -97,7 +97,7 @@ static const double accel_speed = 0.0;
 static const char *termcmd[] = { "foot-run.sh", NULL };
 static const char *menucmd[] = { "wofi-run.sh", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
-static const char *emacscmd[] = { "emacsclient", "-c", "-a", "''" };
+static const char *emacscmd[] = { "emacsclient.sh", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
