@@ -39,11 +39,11 @@
           waybar
           inotify-tools
           # deck soft
-          emacs
-          tmux
-          fish
-          google-chrome-beta
-          direnv nix-direnv
+          # emacs
+          # tmux
+          # fish
+          # google-chrome-beta
+          #direnv nix-direnv
         ];
       };
     });
