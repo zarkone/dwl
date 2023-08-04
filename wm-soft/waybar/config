@@ -13,9 +13,9 @@
 		"custom/dwl_tag#6",
 		"custom/dwl_tag#7",
 		"custom/dwl_tag#8",
-		"custom/dwl_layout"
+		"custom/dwl_layout",
+                "custom/dwl_title"
 	],
-	"modules-center": ["custom/dwl_title"],
 	"modules-right": [
 		"tray",
 		"pulseaudio",
@@ -158,7 +158,7 @@
 	},
 	"custom/dwl_title": {
 		"exec": "waybar-dwl.sh 'HDMI-A-1' title",
-		"format": "{}",
+		"format": " :: {}",
 		"escape": true,
 		"return-type": "json"
 	}
@@ -185,9 +185,9 @@
 		"custom/dwl_tag#6",
 		"custom/dwl_tag#7",
 		"custom/dwl_tag#8",
-		"custom/dwl_layout"
+		"custom/dwl_layout",
+                "custom/dwl_title"
 	],
-	"modules-center": ["custom/dwl_title"],
 	"modules-right": [
 		"clock"
 	],
@@ -251,7 +251,7 @@
 	},
 	"custom/dwl_title": {
 		"exec": "waybar-dwl.sh 'DP-1' title",
-		"format": "{}",
+		"format": " :: {}",
 		"escape": true,
 		"return-type": "json"
 	}
