@@ -24,7 +24,7 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "Iosevka";
-    font-size: 18px;
+    font-size: 14px;
 }
 
 window#waybar {
@@ -33,6 +33,7 @@ window#waybar {
     color: @foreground;
     transition-property: background-color;
     transition-duration: .5s;
+    padding: 5px;
 }
 
 window#waybar.hidden {
