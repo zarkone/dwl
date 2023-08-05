@@ -29,7 +29,7 @@
           xorg.libxcb
           xorg.libX11
           xwayland
-
+          ccls
           pixman
 
           # wm soft
