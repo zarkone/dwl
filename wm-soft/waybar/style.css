@@ -8,7 +8,7 @@
 @define-color color5 #ed8274;
 @define-color color6 #90e1c6;
 @define-color color7 #c7c7c7;
-@define-color color8 #000000;
+@define-color color8 #555555;
 @define-color color9 #FFC44C;
 @define-color color10 #bae67e;
 @define-color color11 #ffd580;
@@ -30,7 +30,6 @@
 
 window#waybar {
     background-color: @background;
-    border-bottom: 3px @color8;
     color: @foreground;
     transition-property: background-color;
     transition-duration: .5s;
@@ -166,26 +165,26 @@ window#waybar.hidden {
 /*     color: #EC5800 */
 /* } */
 
-#custom-dwl_title {
-    color: #017AFF
-}
+/* #custom-dwl_title { */
+/*     color: #017AFF */
+/* } */
 
-#custom-dwl_tag.selected {
-    background: @color4;
-	color: @color8;
-}
+/* #custom-dwl_tag.selected { */
+/*     background: @color4; */
+/* 	color: @color8; */
+/* } */
 
-#custom-dwl_tag.urgent {
-    background-color: @color1;
-	color: @color8;
-}
+/* #custom-dwl_tag.urgent { */
+/*     background-color: @color1; */
+/* 	color: @color8; */
+/* } */
 
 /* #custom-dwl_tag.active { */
 /*     border-top: 1px solid @color7; */
 /* } */
 
-#custom-dwl_tag.empty {
-	font-size: 1px;
-	color: @background;
-	padding: 0;
-}
+/* #custom-dwl_tag.empty { */
+/* 	font-size: 1px; */
+/* 	color: @background; */
+/* 	padding: 0; */
+/* } */

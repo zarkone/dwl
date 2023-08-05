@@ -127,7 +127,7 @@ while [[ -n "$(pgrep waybar)" ]] ; do
     urgenttags="$(  echo "${dwl_latest_output_by_monitor}" | grep '^[[:graph:]]* tags' | awk '{print $6}')"
 
     _cycle
-    printf -- '{"text":"%s"}\n' "${output_text}"
+    printf -- '{"text":"%s"}\n' " ${output_text}"
 
     # 60-second timeout keeps this from becoming a zombified process when waybar is no longer running
     inotifywait -t 60 -qq --event modify "${dwl_output_filename}"
