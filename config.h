@@ -11,8 +11,6 @@ static const float fullscreen_bg[]         = {0.1, 0.1, 0.1, 1.0};
 /* tagging */
 static const int tagcount = 9;
 
-static const char *tags[] = { "a", "r", "s", "t", "d", "g", "p", "b", "v" };
-
 static const Rule rules[] = {
 	/* app_id     title       tags mask     isfloating   monitor */
 	/* examples:
@@ -98,16 +96,21 @@ static const char *termcmd[] = { "foot-run.sh", NULL };
 static const char *menucmd[] = { "wofi-run.sh", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
 static const char *emacscmd[] = { "emacsclient.sh", NULL };
+static const char *mpctogglecmd[] = { "mpc", "toggle", NULL };
+static const char *volraisecmd[] = { "pamixer", "-i", "5", NULL };
+static const char *vollowercmd[] = { "pamixer", "-d", "5", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_apostrophe,          spawn,          {.v = menucmd} },
-	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
-	{ MODKEY,                    XKB_KEY_slash,      spawn,          {.v = termcmd} },
+        { MODKEY,                    XKB_KEY_slash,      spawn,          {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = browsercmd} },
 	{ MODKEY,                    XKB_KEY_f,          spawn,          {.v = emacscmd} },
-	{ MODKEY,                    XKB_KEY_n,          focusstack,     {.i = +1} },
+	{ 0,                    XKB_KEY_XF86AudioPlay,  spawn,      {.v = mpctogglecmd} },
+	{ 0,                    XKB_KEY_XF86AudioRaiseVolume,  spawn,      {.v = volraisecmd} },
+	{ 0,                    XKB_KEY_XF86AudioLowerVolume,  spawn,      {.v = vollowercmd} },
+ 	{ MODKEY,                    XKB_KEY_n,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_e,          focusstack,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_period,          incnmaster,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_comma,          incnmaster,     {.i = -1} },
