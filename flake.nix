@@ -33,12 +33,15 @@
           pixman
 
           # wm soft
-          foot
+          wayland-pkgs.foot
           bemenu
-          wofi
-          waybar
+          wayland-pkgs.wofi
+          wayland-pkgs.waybar
+          wayland-pkgs.wl-gammarelay-rs
+          wayland-pkgs.wl-gammactl
+          wayland-pkgs.wev
           inotify-tools
-          slurp
+          # slurp
           # deck soft
           # emacs
           # tmux
