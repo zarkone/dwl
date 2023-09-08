@@ -19,6 +19,7 @@
     in {
       devShell = pkgs.mkShell {
         name = "zarkone-dwl";
+        LD_LIBRARY_PATH = "${wayland-pkgs.wlroots}/lib";
         nativeBuildInputs = with pkgs; [
           wayland-pkgs.wlroots
           wayland-pkgs.new-wayland-protocols
