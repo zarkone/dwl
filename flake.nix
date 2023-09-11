@@ -23,6 +23,7 @@
         nativeBuildInputs = with pkgs; [
           wayland-pkgs.wlroots
           wayland-pkgs.new-wayland-protocols
+          wayland-pkgs.wlr-randr
           wayland.dev
           pkg-config
           libxkbcommon

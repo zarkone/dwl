@@ -36,8 +36,8 @@ static const MonitorRule monrules[] = {
 	{ "eDP-1",    0.5,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL },
 	*/
 	/* defaults */
-        { "HDMI-A-1",       0.5, 1,      2,    &layouts[1], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
-	{ "DP-1",           0.5, 1,      1.5,    &layouts[1], WL_OUTPUT_TRANSFORM_90, -4608, 0},
+        { "HDMI-A-1",       0.5, 1,      2,    &layouts[1], WL_OUTPUT_TRANSFORM_NORMAL,   0,  0 },
+	{ "DP-1",           0.5, 1,      1.5,    &layouts[1], WL_OUTPUT_TRANSFORM_90, 3800, -10},
 };
 
 /* keyboard */
@@ -94,7 +94,7 @@ static const double accel_speed = 0.0;
 /* commands */
 static const char *termcmd[] = { "foot-run.sh", NULL };
 static const char *menucmd[] = { "wofi-run.sh", NULL };
-static const char *browsercmd[] = { "firefox", NULL };
+static const char *browsercmd[] = { "firefox.sh", NULL };
 static const char *emacscmd[] = { "emacsclient.sh", NULL };
 static const char *mpctogglecmd[] = { "mpc", "toggle", NULL };
 static const char *volraisecmd[] = { "pamixer", "-i", "5", NULL };
