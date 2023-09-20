@@ -53,8 +53,9 @@
 
 ############### USER: MODIFY THESE VARIABLES ###############
 readonly dwl_output_filename="$HOME"/.cache/dwltags                  # File to watch for dwl output
-readonly labels=( "" "" "" "" "" "" "" "" "")              # Number of lables must match dwl's config.h tagcount
-# readonly labels=( "a" "r" "s" "t" "d" "g" "p" "b"  )              # Number of lables must match dwl's config.h tagcount
+# readonly labels=( "" "" "" "" "" "" "" "" "")              # Number of lables must match dwl's config.h tagcount
+readonly labels=( "A" "R" "S" "T" "D" "G" "P" "B" "V"  )              # Number of lables must match dwl's config.h tagcount
+# readonly labels=( "!" "@" "#" "$" "%" "^" "&" "*"  )              # Number of lables must match dwl's config.h tagcount
 max_title_length=70                                                  # Adjust according to available space in YOUR waybar - prevent right-side overflow
 pango_tag_default="<span                      foreground='#00ffff'>" # Pango span style for 'default' tags
 # pango_tag_active="<span overline='single' overline_color='#a020f0'>" # Pango span style for 'active' tags

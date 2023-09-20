@@ -97,6 +97,7 @@ static const char *menucmd[] = { "wofi-run.sh", NULL };
 static const char *browsercmd[] = { "firefox.sh", NULL };
 static const char *emacscmd[] = { "emacsclient.sh", NULL };
 static const char *mpctogglecmd[] = { "mpc", "toggle", NULL };
+static const char *ncmpcppcmd[] = { "ncmpcpp.sh", NULL };
 static const char *volraisecmd[] = { "pamixer", "-i", "5", NULL };
 static const char *vollowercmd[] = { "pamixer", "-d", "5", NULL };
 
@@ -116,7 +117,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_comma,          incnmaster,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05} },
 	{ MODKEY,                    XKB_KEY_l,          setmfact,       {.f = +0.05} },
-	// { MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
+	{ MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
 	//{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY,                    XKB_KEY_q,          killclient,     {0} },
 	{ MODKEY,                    XKB_KEY_k,          setlayout,      {.v = &layouts[0]} },

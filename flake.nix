@@ -20,10 +20,12 @@
       devShell = pkgs.mkShell {
         name = "zarkone-dwl";
         LD_LIBRARY_PATH = "${wayland-pkgs.wlroots}/lib";
+        NIXOS_OZONE_WL = "1";
         nativeBuildInputs = with pkgs; [
           wayland-pkgs.wlroots
           wayland-pkgs.new-wayland-protocols
           wayland-pkgs.wlr-randr
+          wayland-pkgs.grim
           wayland.dev
           pkg-config
           libxkbcommon

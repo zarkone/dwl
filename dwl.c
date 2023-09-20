@@ -2763,6 +2763,7 @@ updatemons(struct wl_listener *listener, void *data)
 	Monitor *m;
 
 	/* First remove from the layout the disabled monitors */
+        /* zarkone: try to remove this one when monitor disapears */
 	wl_list_for_each(m, &mons, link) {
 		if (m->wlr_output->enabled)
 			continue;
