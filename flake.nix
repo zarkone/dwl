@@ -21,6 +21,7 @@
         name = "zarkone-dwl";
         LD_LIBRARY_PATH = "${wayland-pkgs.wlroots}/lib";
         NIXOS_OZONE_WL = "1";
+        BROWSER = "firefox";
         nativeBuildInputs = with pkgs; [
           wayland-pkgs.wlroots
           wayland-pkgs.new-wayland-protocols
