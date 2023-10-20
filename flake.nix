@@ -19,14 +19,11 @@
     in {
       devShell = pkgs.mkShell {
         name = "zarkone-dwl";
-        LD_LIBRARY_PATH = "${wayland-pkgs.wlroots}/lib";
         NIXOS_OZONE_WL = "1";
-        BROWSER = "firefox";
+        BROWSER = "firefox-beta";
         nativeBuildInputs = with pkgs; [
           wayland-pkgs.wlroots
           wayland-pkgs.new-wayland-protocols
-          wayland-pkgs.wlr-randr
-          wayland-pkgs.grim
           wayland.dev
           pkg-config
           libxkbcommon
@@ -38,14 +35,19 @@
           pixman
 
           # wm soft
+        ];
+
+        packages = [
+          wayland-pkgs.wlr-randr
+          wayland-pkgs.grim
           wayland-pkgs.foot
-          bemenu
+          pkgs.bemenu
           wayland-pkgs.wofi
           wayland-pkgs.waybar
           wayland-pkgs.wl-gammarelay-rs
           wayland-pkgs.wl-gammactl
           wayland-pkgs.wev
-          inotify-tools
+          pkgs.inotify-tools
           # slurp
           # deck soft
           # emacs
