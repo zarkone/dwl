@@ -84,17 +84,17 @@ static const double accel_speed = 0.0;
 
 /* If you want to use the windows key change this to WLR_MODIFIER_LOGO */
 #define MODKEY WLR_MODIFIER_LOGO
-#define TAGKEYS(KEY,SKEY,TAG) \
-	{ MODKEY,                    KEY,            view,            {.ui = 1 << TAG} }, \
-	{ MODKEY|WLR_MODIFIER_CTRL,  KEY,            toggleview,      {.ui = 1 << TAG} }, \
-	{ MODKEY|WLR_MODIFIER_SHIFT, SKEY,           tag,             {.ui = 1 << TAG} }, \
-	{ MODKEY|WLR_MODIFIER_CTRL|WLR_MODIFIER_SHIFT,SKEY,toggletag, {.ui = 1 << TAG} }
+#define TAGKEYS(KEY,TAG) \
+	{ MODKEY,                    KEY,          view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|WLR_MODIFIER_CTRL,  KEY,          toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY|WLR_MODIFIER_ALT,   KEY,          tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,KEY,toggletag, {.ui = 1 << TAG} }
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot-run.sh", NULL };
+static const char *termcmd[] = { "alacritty", NULL };
 static const char *menucmd[] = { "bemenu.sh", NULL };
 static const char *browsercmd[] = { "firefox.sh", NULL };
 static const char *emacscmd[] = { "emacsclient.sh", NULL };
@@ -129,17 +129,17 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_j,          togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
-	{ MODKEY,                    XKB_KEY_semicolon,  focusmon,       {.i = WLR_DIRECTION_LEFT} },
-	{ MODKEY|WLR_MODIFIER_ALT, XKB_KEY_semicolon,    tagmon,         {.i = WLR_DIRECTION_LEFT} },
-	TAGKEYS(          XKB_KEY_a, XKB_KEY_exclam,                     0),
-	TAGKEYS(          XKB_KEY_r, XKB_KEY_at,                         1),
-	TAGKEYS(          XKB_KEY_s, XKB_KEY_numbersign,                 2),
-	TAGKEYS(          XKB_KEY_t, XKB_KEY_dollar,                     3),
-	TAGKEYS(          XKB_KEY_d, XKB_KEY_percent,                    4),
-	TAGKEYS(          XKB_KEY_g, XKB_KEY_asciicircum,                5),
-	TAGKEYS(          XKB_KEY_p, XKB_KEY_ampersand,                  6),
-	TAGKEYS(          XKB_KEY_b, XKB_KEY_asterisk,                   7),
-	TAGKEYS(          XKB_KEY_v, XKB_KEY_parenleft,                  8),
+	{ MODKEY,                    XKB_KEY_z,          focusmon,       {.i = WLR_DIRECTION_LEFT} },
+	{ MODKEY|WLR_MODIFIER_ALT, XKB_KEY_z,            tagmon,         {.i = WLR_DIRECTION_LEFT} },
+	TAGKEYS(          XKB_KEY_a,                  0),
+	TAGKEYS(          XKB_KEY_r,                  1),
+	TAGKEYS(          XKB_KEY_s,                  2),
+	TAGKEYS(          XKB_KEY_t,                  3),
+	TAGKEYS(          XKB_KEY_d,                  4),
+	TAGKEYS(          XKB_KEY_g,                  5),
+	TAGKEYS(          XKB_KEY_p,                  6),
+	TAGKEYS(          XKB_KEY_b,                  7),
+	TAGKEYS(          XKB_KEY_v,                  8),
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          quit,           {0} },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
