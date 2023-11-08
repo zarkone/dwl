@@ -1,6 +1,6 @@
 {
   description = "zarkone-dwl";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/23.11-pre";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.nixpkgs-wayland  = { url = "github:nix-community/nixpkgs-wayland"; };
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
