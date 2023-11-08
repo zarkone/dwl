@@ -46,7 +46,7 @@ static const struct xkb_rule_names xkb_rules = {
 	/* example:
 	.options = "ctrl:nocaps",
 	*/
-  	.options = "grp:alt_space_toggle",
+  	.options = "grp:shifts_toggle",
         .layout = "us,us",
         .variant = ",rus",
 };
